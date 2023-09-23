@@ -1,4 +1,12 @@
 {
-  "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "strict": true,
+    "strictBindCallApply": true,
+    "alwaysStrict": true,
+    "baseUrl": "src",
+    "paths": {
+    }
+  },
+  "exclude": ["**/*.test.ts", "fixtures", "node_modules", "src/examples"]
 }

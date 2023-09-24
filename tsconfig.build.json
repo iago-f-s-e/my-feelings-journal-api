@@ -4,9 +4,6 @@
     "strict": true,
     "strictBindCallApply": true,
     "alwaysStrict": true,
-    "baseUrl": "src",
-    "paths": {
-    }
   },
-  "exclude": ["**/*.test.ts", "fixtures", "node_modules", "src/examples"]
+  "exclude": ["**/*.test.ts", "node_modules"]
 }

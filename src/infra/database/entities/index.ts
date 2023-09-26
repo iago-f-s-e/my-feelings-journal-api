@@ -1,4 +1,4 @@
-export { FeelingJournal } from './feeling-journal';
-export { FeelingJournalHelper } from './feeling-journal-helper';
-export { HappeningDiary } from './happening-diary';
-export { SelfCareActivitie } from './self-care-activitie';
+export { FeelingJournalEntity } from './feeling-journal.entity';
+export { FeelingJournalHelperEntity } from './feeling-journal-helper.entity';
+export { HappeningDiaryEntity } from './happening-diary.entity';
+export { SelfCareActivitieEntity } from './self-care-activitie.entity';

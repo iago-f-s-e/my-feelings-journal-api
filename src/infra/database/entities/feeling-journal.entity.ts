@@ -1,9 +1,10 @@
+import { FeelingJournal } from '@domain/interfaces/entities';
 import { FeelingType } from '@domain/types';
-import { HappeningDiary, SelfCareActivitie } from '@infra/database/entities';
+import { HappeningDiaryEntity, SelfCareActivitieEntity } from '@infra/database/entities';
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('feeling_journal')
-export class FeelingJournal {
+export class FeelingJournalEntity implements FeelingJournal {
   @PrimaryGeneratedColumn('increment', {
     type: 'integer',
     name: 'feeling_journal_id',
@@ -22,18 +23,22 @@ export class FeelingJournal {
   public closed!: boolean;
 
   @Column({ type: 'text', nullable: true })
-  public description!: string;
+  public description?: string;
 
   @Column({ type: 'varchar', name: 'how_was_today', nullable: true })
   public howWasToday!: FeelingType;
 
-  @OneToMany(() => SelfCareActivitie, selfCareActivities => selfCareActivities.feelingJournal, {
-    cascade: true
-  })
-  public selfCareActivities!: SelfCareActivitie[];
+  @OneToMany(
+    () => SelfCareActivitieEntity,
+    selfCareActivities => selfCareActivities.feelingJournal,
+    {
+      cascade: true
+    }
+  )
+  public selfCareActivities!: SelfCareActivitieEntity[];
 
-  @OneToMany(() => HappeningDiary, happeningsDiary => happeningsDiary.feelingJournal, {
+  @OneToMany(() => HappeningDiaryEntity, happeningsDiary => happeningsDiary.feelingJournal, {
     cascade: true
   })
-  public happeningsDiary!: HappeningDiary[];
+  public happeningsDiary!: HappeningDiaryEntity[];
 }

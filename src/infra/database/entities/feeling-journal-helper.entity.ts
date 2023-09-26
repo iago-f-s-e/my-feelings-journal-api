@@ -1,7 +1,8 @@
+import { FeelingJournalHelper } from '@domain/interfaces/entities';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('feeling_journal_helper')
-export class FeelingJournalHelper {
+export class FeelingJournalHelperEntity implements FeelingJournalHelper {
   @PrimaryGeneratedColumn('increment', {
     type: 'integer',
     name: 'feeling_journal_helper_id',

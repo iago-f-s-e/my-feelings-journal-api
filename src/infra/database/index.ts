@@ -3,10 +3,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { dataSourceOptions } from './config';
 import * as Entities from './entities';
+import * as Repositories from './repositories';
 
 const entities = Object.values(Entities);
+const repositories = Object.values(Repositories);
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions), TypeOrmModule.forFeature(entities)]
+  imports: [TypeOrmModule.forRoot(dataSourceOptions), TypeOrmModule.forFeature(entities)],
+  providers: repositories,
+  exports: repositories
 })
 export class DatabaseModule {}

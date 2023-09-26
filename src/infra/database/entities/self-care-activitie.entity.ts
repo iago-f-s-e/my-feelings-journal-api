@@ -1,4 +1,5 @@
-import { FeelingJournal } from '@infra/database/entities';
+import { SelfCareActivitie } from '@domain/interfaces/entities';
+import { FeelingJournalEntity } from '@infra/database/entities';
 import {
   Column,
   CreateDateColumn,
@@ -10,7 +11,7 @@ import {
 } from 'typeorm';
 
 @Entity('self_care_activitie')
-export class SelfCareActivitie {
+export class SelfCareActivitieEntity implements SelfCareActivitie {
   @PrimaryGeneratedColumn('increment', {
     type: 'integer',
     name: 'self_care_activitie_id',
@@ -36,7 +37,7 @@ export class SelfCareActivitie {
   @UpdateDateColumn({ type: 'timestamp', name: 'updated_at', default: 'now()', select: false })
   public updatedAt!: Date;
 
-  @ManyToOne(() => FeelingJournal, feelingJournal => feelingJournal.selfCareActivities, {
+  @ManyToOne(() => FeelingJournalEntity, feelingJournal => feelingJournal.selfCareActivities, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
   })
@@ -45,5 +46,5 @@ export class SelfCareActivitie {
     referencedColumnName: 'id',
     foreignKeyConstraintName: 'FK_self_care_activitie_feeling_journal'
   })
-  public feelingJournal!: FeelingJournal;
+  public feelingJournal!: FeelingJournalEntity;
 }

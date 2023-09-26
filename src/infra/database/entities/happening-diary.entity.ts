@@ -1,9 +1,10 @@
+import { HappeningDiary } from '@domain/interfaces/entities';
 import { FeelingType } from '@domain/types';
-import { FeelingJournal } from '@infra/database/entities';
+import { FeelingJournalEntity } from '@infra/database/entities';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('happening_diary')
-export class HappeningDiary {
+export class HappeningDiaryEntity implements HappeningDiary {
   @PrimaryGeneratedColumn('increment', {
     type: 'integer',
     name: 'happening_diary_id',
@@ -20,7 +21,7 @@ export class HappeningDiary {
   @Column({ type: 'varchar', name: 'how_i_felt' })
   public howIFelt!: FeelingType;
 
-  @ManyToOne(() => FeelingJournal, feelingJournal => feelingJournal.happeningsDiary, {
+  @ManyToOne(() => FeelingJournalEntity, feelingJournal => feelingJournal.happeningsDiary, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
   })
@@ -29,5 +30,5 @@ export class HappeningDiary {
     referencedColumnName: 'id',
     foreignKeyConstraintName: 'FK_happening_diary_feeling_journal'
   })
-  public feelingJournal!: FeelingJournal;
+  public feelingJournal!: FeelingJournalEntity;
 }

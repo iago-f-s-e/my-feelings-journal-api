@@ -1,1 +1,1 @@
-export { CreateFeelingJournalController } from './create-feeling-journal.controller';
+export { FeelingJournalController } from './feeling-journal.controller';

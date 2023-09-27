@@ -18,4 +18,8 @@ export class FeelingJournalHelperRepository {
   public updateLastFeelingJournal(id: number, lastFeelingJournalId: number): Promise<UpdateResult> {
     return this.feelingJournalHelper.update(id, { lastFeelingJournalId });
   }
+
+  public updateLastCount(id: number, lastFeelingJournalCount: number): Promise<UpdateResult> {
+    return this.feelingJournalHelper.update(id, { lastFeelingJournalCount });
+  }
 }

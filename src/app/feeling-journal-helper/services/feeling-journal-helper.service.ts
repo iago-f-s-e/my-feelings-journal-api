@@ -31,4 +31,8 @@ export class FeelingJournalHelperService {
   public async updateLastFeelingJournal(id: number, feelingJournalId: number): Promise<void> {
     await this.repository.updateLastFeelingJournal(id, feelingJournalId);
   }
+
+  public async updateLastCount(id: number, count: number): Promise<void> {
+    await this.repository.updateLastCount(id, count);
+  }
 }

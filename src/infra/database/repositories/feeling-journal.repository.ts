@@ -36,4 +36,29 @@ export class FeelingJournalRepository {
       .where(`feeling_journal.date between '${start}' and '${end}'`)
       .getMany();
   }
+
+  public getFullDetailByDate(date: string): Promise<FeelingJournal | null> {
+    return this.feelingJournal
+      .createQueryBuilder('feeling_journal')
+      .select([
+        'feeling_journal.id',
+        'feeling_journal.count',
+        'feeling_journal.date',
+        'feeling_journal.description',
+        'feeling_journal.howWasToday',
+        'selfCareActivities.id',
+        'selfCareActivities.description',
+        'selfCareActivities.darkColor',
+        'selfCareActivities.normalColor',
+        'selfCareActivities.done',
+        'happeningsDiary.id',
+        'happeningsDiary.title',
+        'happeningsDiary.description',
+        'happeningsDiary.howIFelt'
+      ])
+      .where(`feeling_journal.date = '${date}'`)
+      .leftJoin('feeling_journal.selfCareActivities', 'selfCareActivities')
+      .leftJoin('feeling_journal.happeningsDiary', 'happeningsDiary')
+      .getOne();
+  }
 }

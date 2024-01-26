@@ -30,4 +30,11 @@ export class FindFeelingJournalService {
   public async getWeek(start: string, end: string): Promise<FeelingJournal[]> {
     return this.repository.getWeek(start, end);
   }
+
+  @CatchException({
+    bubbleException: true
+  })
+  public async getFullDetailByDate(date: string): Promise<FeelingJournal | null> {
+    return this.repository.getFullDetailByDate(date);
+  }
 }

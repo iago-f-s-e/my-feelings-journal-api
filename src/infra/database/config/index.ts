@@ -10,5 +10,5 @@ export const dataSourceOptions = {
   password: Settings.DB_PASS,
   ssl: Settings.DB_SSL,
   entities: [Settings.DB_PATH_ENTITIES],
-  logging: ['query']
+  logging: Settings.IS_DEVELOPMENT ? ['query', 'error', 'warn', 'info'] : ['error', 'warn']
 } as DataSourceOptions;

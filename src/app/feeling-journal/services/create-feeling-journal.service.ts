@@ -29,7 +29,7 @@ export class CreateFeelingJournalService {
     bubbleException: true
   })
   public async exec(payload: CreateFeelingJournalInService): Promise<FeelingJournal> {
-    const lastValues = await this.helperService.getLast();
+    const lastValues = await this.helperService.getLastOrCreateDefault();
 
     const newCount = lastValues.lastFeelingJournalCount + this.getCount(payload.howWasToday);
 
@@ -39,7 +39,6 @@ export class CreateFeelingJournalService {
     };
 
     const created = await this.repository.insert(toInsert);
-
     if (newCount !== 0) {
       await this.helperService.updateLastValues(lastValues.id, created.id, newCount);
     }

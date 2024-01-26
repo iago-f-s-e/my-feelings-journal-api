@@ -22,4 +22,8 @@ export class FeelingJournalHelperRepository {
   ): Promise<UpdateResult> {
     return this.feelingJournalHelper.update(id, { lastFeelingJournalId, lastFeelingJournalCount });
   }
+
+  public insertWithDefaultValues(): Promise<FeelingJournalHelper> {
+    return this.feelingJournalHelper.save(this.feelingJournalHelper.create());
+  }
 }

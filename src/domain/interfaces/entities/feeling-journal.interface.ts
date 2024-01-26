@@ -5,7 +5,7 @@ import { FeelingType } from '@domain/types';
 export interface FeelingJournal {
   id: string;
   count: number;
-  date: Date;
+  date: string;
   description?: string;
   howWasToday: FeelingType;
   selfCareActivities: SelfCareActivitie[];

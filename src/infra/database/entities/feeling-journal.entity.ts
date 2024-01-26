@@ -18,7 +18,7 @@ export class FeelingJournalEntity implements FeelingJournal {
 
   @Index('IDX_feeling_journal_date', { unique: true })
   @Column({ type: 'date' })
-  public date!: Date;
+  public date!: string;
 
   @Column({ type: 'text', nullable: true })
   public description?: string;

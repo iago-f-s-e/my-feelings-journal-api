@@ -1,15 +1,6 @@
-export {
-  CreateFeelingJournalInController,
-  CreateFeelingJournalInRepository,
-  CreateFeelingJournalInService
-} from './create-feeling-journal.dto';
-export {
-  CreateHappeningDiaryDtoInController,
-  CreateHappeningDiaryDtoInRepository,
-  CreateHappeningDiaryDtoInService
-} from './create-happening-diary-store';
-export {
-  CreateSelfCareDtoInController,
-  CreateSelfCareDtoInRepository,
-  CreateSelfCareDtoInService
-} from './create-self-care.dto';
+export * from './client-feeling-journal.dto';
+export * from './client-happening-diary.dto';
+export * from './client-self-care.dto';
+export * from './create-feeling-journal.dto';
+export * from './create-happening-diary-store';
+export * from './create-self-care.dto';

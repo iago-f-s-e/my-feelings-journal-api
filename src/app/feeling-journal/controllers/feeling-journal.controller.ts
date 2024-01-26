@@ -1,10 +1,15 @@
 import { CatchException } from '@daki/logr';
-import { CreateFeelingJournalInController } from '@domain/dto';
+import { ClientFeelingJournalDto, CreateFeelingJournalInController } from '@domain/dto';
 import { FeelingJournal } from '@domain/interfaces/entities';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { clientFeelingJournalMapping } from '@domain/mappings';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 import { CreateFeelingJournalModel } from '../model';
-import { CreateFeelingJournalService, FindFeelingJournalService } from '../services';
+import {
+  CreateFeelingJournalService,
+  FindFeelingJournalService,
+  FindOrCreateFeelingJournalService
+} from '../services';
 
 type WeekQuery = {
   start: string;
@@ -15,7 +20,8 @@ type WeekQuery = {
 export class FeelingJournalController {
   constructor(
     private readonly createService: CreateFeelingJournalService,
-    private readonly findService: FindFeelingJournalService
+    private readonly findService: FindFeelingJournalService,
+    private readonly findOrCreateService: FindOrCreateFeelingJournalService
   ) {}
 
   @Post()
@@ -34,5 +40,13 @@ export class FeelingJournalController {
   })
   public async getWeek(@Query() weekQuery: WeekQuery): Promise<FeelingJournal[]> {
     return this.findService.getWeek(weekQuery.start, weekQuery.end);
+  }
+
+  @Get(':date')
+  @CatchException({
+    bubbleException: true
+  })
+  public async getByDate(@Param('date') date: string): Promise<ClientFeelingJournalDto> {
+    return clientFeelingJournalMapping(await this.findOrCreateService.getFullDetailOrCreate(date));
   }
 }

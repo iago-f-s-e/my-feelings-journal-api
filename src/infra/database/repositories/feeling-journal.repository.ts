@@ -1,9 +1,9 @@
-import { CreateFeelingJournalInRepository, UpdateFeelingJournalInRepository } from '@domain/dto';
+import { CreateFeelingJournalInRepository } from '@domain/dto';
 import { FeelingJournal } from '@domain/interfaces/entities';
 import { FeelingJournalEntity } from '@infra/database/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class FeelingJournalRepository {
@@ -16,15 +16,24 @@ export class FeelingJournalRepository {
     return this.feelingJournal.save(this.feelingJournal.create(payload));
   }
 
-  public update(payload: UpdateFeelingJournalInRepository): Promise<UpdateResult> {
-    const { id, ...toUpdate } = payload;
-    return this.feelingJournal.update(id, toUpdate);
-  }
-
   public getById(id: number): Promise<FeelingJournal | null> {
     return this.feelingJournal
       .createQueryBuilder('feeling_journal')
       .where(`feeling_journal.id = ${id}`)
       .getOne();
+  }
+
+  public getByDate(date: string): Promise<FeelingJournal | null> {
+    return this.feelingJournal
+      .createQueryBuilder('feeling_journal')
+      .where(`feeling_journal.date = '${date}'`)
+      .getOne();
+  }
+
+  public getWeek(start: string, end: string): Promise<FeelingJournal[]> {
+    return this.feelingJournal
+      .createQueryBuilder('feeling_journal')
+      .where(`feeling_journal.date between '${start}' and '${end}'`)
+      .getMany();
   }
 }

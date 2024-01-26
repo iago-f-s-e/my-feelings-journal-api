@@ -5,7 +5,9 @@
       "@app/*": ["./src/app/*"],
       "@domain/*": ["./src/domain/*"],
       "@infra/*": ["./src/infra/*"],
-      "@server/*": ["./src/server/*"],
+      "@server/*": ["./src/server/*"]
     }
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

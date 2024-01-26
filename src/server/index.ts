@@ -1,6 +1,6 @@
+import { AppModule } from '@app/app-module';
 import { NestFactory } from '@nestjs/core';
 
-import { AppModule } from '../app/app-module';
 import { PORT, SERVER_URL } from './settings';
 
 async function bootstrap(): Promise<unknown> {

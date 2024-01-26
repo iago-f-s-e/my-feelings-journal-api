@@ -1,26 +1,24 @@
 import { FeelingJournal } from '@domain/interfaces/entities';
 import { FeelingType } from '@domain/types';
 import { HappeningDiaryEntity, SelfCareActivitieEntity } from '@infra/database/entities';
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { randomUUID } from 'crypto';
+import { BeforeInsert, Column, Entity, Index, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('feeling_journal')
 export class FeelingJournalEntity implements FeelingJournal {
-  @PrimaryGeneratedColumn('increment', {
-    type: 'integer',
+  @PrimaryColumn({
+    type: 'uuid',
     name: 'feeling_journal_id',
     primaryKeyConstraintName: 'PK_feeling_journal_id'
   })
-  public id!: number;
+  public id!: string;
 
   @Column({ type: 'integer' })
   public count!: number;
 
-  @Index('IDX_feeling_journal_date', { unique: false })
+  @Index('IDX_feeling_journal_date', { unique: true })
   @Column({ type: 'date' })
   public date!: Date;
-
-  @Column({ type: 'boolean', default: false })
-  public closed!: boolean;
 
   @Column({ type: 'text', nullable: true })
   public description?: string;
@@ -41,4 +39,9 @@ export class FeelingJournalEntity implements FeelingJournal {
     cascade: true
   })
   public happeningsDiary!: HappeningDiaryEntity[];
+
+  @BeforeInsert()
+  private setId(): void {
+    this.id = randomUUID();
+  }
 }

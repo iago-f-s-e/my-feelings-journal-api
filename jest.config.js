@@ -15,7 +15,6 @@ module.exports = {
   testPathIgnorePatterns: [
     "/node_modules/"
   ],
-
   transform: {
     "^.+\\.(t|j)s$": "@swc/jest",
   },

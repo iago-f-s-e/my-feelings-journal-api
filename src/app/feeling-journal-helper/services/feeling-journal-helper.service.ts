@@ -12,7 +12,7 @@ export class FeelingJournalHelperService {
       const fallback: FeelingJournalHelper = {
         id: 1,
         lastFeelingJournalCount: 0,
-        lastFeelingJournalId: 0
+        lastFeelingJournalId: ''
       };
 
       return fallback;
@@ -28,11 +28,11 @@ export class FeelingJournalHelperService {
     return feelingJournalHelper;
   }
 
-  public async updateLastFeelingJournal(id: number, feelingJournalId: number): Promise<void> {
-    await this.repository.updateLastFeelingJournal(id, feelingJournalId);
-  }
-
-  public async updateLastCount(id: number, count: number): Promise<void> {
-    await this.repository.updateLastCount(id, count);
+  public async updateLastValues(
+    id: number,
+    feelingJournalId: string,
+    count: number
+  ): Promise<void> {
+    await this.repository.updateLastValues(id, feelingJournalId, count);
   }
 }

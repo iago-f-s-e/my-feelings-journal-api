@@ -8,7 +8,6 @@
     "noEmitOnError": true,
     "useUnknownInCatchVariables": true,
     "noUnusedParameters": true,
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -27,10 +26,5 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules/*",
-  ]
+  "exclude": ["node_modules"]
 }

@@ -1,16 +1,21 @@
 import { CatchException } from '@daki/logr';
-import { CreateFeelingJournalInController, UpdateFeelingJournalInController } from '@domain/dto';
+import { CreateFeelingJournalInController } from '@domain/dto';
 import { FeelingJournal } from '@domain/interfaces/entities';
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 
-import { CreateFeelingJournalModel, UpdateFeelingJournalModel } from '../model';
-import { CreateFeelingJournalService, UpdateFeelingJournalService } from '../services';
+import { CreateFeelingJournalModel } from '../model';
+import { CreateFeelingJournalService, FindFeelingJournalService } from '../services';
+
+type WeekQuery = {
+  start: string;
+  end: string;
+};
 
 @Controller('feeling-journal')
 export class FeelingJournalController {
   constructor(
     private readonly createService: CreateFeelingJournalService,
-    private readonly updateService: UpdateFeelingJournalService
+    private readonly findService: FindFeelingJournalService
   ) {}
 
   @Post()
@@ -23,16 +28,11 @@ export class FeelingJournalController {
     return this.createService.exec(feelingJournal.value);
   }
 
-  @Put(':id')
+  @Get('week')
   @CatchException({
     bubbleException: true
   })
-  public async update(
-    @Param('id') id: number,
-    @Body() body: UpdateFeelingJournalInController
-  ): Promise<void> {
-    const feelingJournal = new UpdateFeelingJournalModel(id, body);
-
-    await this.updateService.exec(feelingJournal.value);
+  public async getWeek(@Query() weekQuery: WeekQuery): Promise<FeelingJournal[]> {
+    return this.findService.getWeek(weekQuery.start, weekQuery.end);
   }
 }

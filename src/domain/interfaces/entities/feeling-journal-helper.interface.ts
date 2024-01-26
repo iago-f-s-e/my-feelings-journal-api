@@ -1,5 +1,5 @@
 export interface FeelingJournalHelper {
   id: number;
-  lastFeelingJournalId: number;
+  lastFeelingJournalId: string;
   lastFeelingJournalCount: number;
 }

@@ -9,5 +9,6 @@ export const dataSourceOptions = {
   username: Settings.DB_USER,
   password: Settings.DB_PASS,
   ssl: Settings.DB_SSL,
-  entities: [Settings.DB_PATH_ENTITIES]
+  entities: [Settings.DB_PATH_ENTITIES],
+  logging: ['query']
 } as DataSourceOptions;

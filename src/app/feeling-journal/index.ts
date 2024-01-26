@@ -6,12 +6,17 @@ import { FeelingJournalController } from './controllers';
 import {
   CreateFeelingJournalService,
   FindFeelingJournalService,
-  UpdateFeelingJournalService
+  FindOrCreateFeelingJournalService
 } from './services';
 
 @Module({
   imports: [InfraModule, FeelingJournalHelperModule],
   controllers: [FeelingJournalController],
-  providers: [CreateFeelingJournalService, FindFeelingJournalService, UpdateFeelingJournalService]
+  providers: [
+    CreateFeelingJournalService,
+    FindFeelingJournalService,
+    FindOrCreateFeelingJournalService
+  ],
+  exports: [FindOrCreateFeelingJournalService]
 })
 export class FeelingJournalModule {}

@@ -3,10 +3,9 @@ import { SelfCareActivitie } from '@domain/interfaces/entities/self-care-activit
 import { FeelingType } from '@domain/types';
 
 export interface FeelingJournal {
-  id: number;
+  id: string;
   count: number;
   date: Date;
-  closed: boolean;
   description?: string;
   howWasToday: FeelingType;
   selfCareActivities: SelfCareActivitie[];

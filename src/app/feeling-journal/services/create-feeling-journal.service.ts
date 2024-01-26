@@ -2,6 +2,7 @@ import { FeelingJournalHelperService } from '@app/feeling-journal-helper/service
 import { CatchException } from '@daki/logr';
 import { CreateFeelingJournalInRepository, CreateFeelingJournalInService } from '@domain/dto';
 import { FeelingJournal } from '@domain/interfaces/entities';
+import { FeelingType } from '@domain/types';
 import { FeelingJournalRepository } from '@infra/database/repositories';
 import { Injectable } from '@nestjs/common';
 
@@ -12,20 +13,36 @@ export class CreateFeelingJournalService {
     private readonly helperService: FeelingJournalHelperService
   ) {}
 
+  private getCount(feelingType?: FeelingType): number {
+    const countByFeelingType: Record<FeelingType, number> = {
+      VERY_GOOD: 4,
+      GOOD: 2,
+      NORMAL: 1,
+      BAD: -1,
+      VERY_BAD: -2
+    };
+
+    return countByFeelingType[feelingType as FeelingType] || 0;
+  }
+
   @CatchException({
     bubbleException: true
   })
   public async exec(payload: CreateFeelingJournalInService): Promise<FeelingJournal> {
     const lastValues = await this.helperService.getLast();
 
+    const newCount = lastValues.lastFeelingJournalCount + this.getCount(payload.howWasToday);
+
     const toInsert: CreateFeelingJournalInRepository = {
       ...payload,
-      count: lastValues.lastFeelingJournalCount
+      count: newCount
     };
 
     const created = await this.repository.insert(toInsert);
 
-    await this.helperService.updateLastFeelingJournal(lastValues.id, created.id);
+    if (newCount !== 0) {
+      await this.helperService.updateLastValues(lastValues.id, created.id, newCount);
+    }
 
     return created;
   }

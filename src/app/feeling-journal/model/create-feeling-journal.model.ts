@@ -5,8 +5,9 @@ export class CreateFeelingJournalModel {
 
   constructor(data: CreateFeelingJournalInController) {
     this.toCreate = {
-      ...data,
-      date: new Date(data.date)
+      date: data.date,
+      howWasToday: data.feelingType,
+      description: data.description
     };
   }
 

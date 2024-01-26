@@ -2,8 +2,10 @@ import { FeelingJournal } from '@domain/interfaces/entities/feeling-journal.inte
 
 export interface SelfCareActivitie {
   id: number;
-  feelingJournalId: number;
-  title: string;
+  feelingJournalId: string;
+  description: string;
+  darkColor: string;
+  normalColor: string;
   done: boolean;
   rememberMe: boolean;
   createdAt: Date;

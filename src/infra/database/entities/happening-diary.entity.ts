@@ -12,8 +12,11 @@ export class HappeningDiaryEntity implements HappeningDiary {
   })
   public id!: number;
 
-  @Column({ type: 'integer', name: 'feeling_journal_id' })
-  public feelingJournalId!: number;
+  @Column({ type: 'uuid', name: 'feeling_journal_id' })
+  public feelingJournalId!: string;
+
+  @Column({ type: 'varchar' })
+  public title!: string;
 
   @Column({ type: 'varchar' })
   public description!: string;

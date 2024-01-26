@@ -3,7 +3,8 @@ import { FeelingType } from '@domain/types';
 
 export interface HappeningDiary {
   id: number;
-  feelingJournalId: number;
+  feelingJournalId: string;
+  title: string;
   description: string;
   howIFelt: FeelingType;
   feelingJournal: FeelingJournal;

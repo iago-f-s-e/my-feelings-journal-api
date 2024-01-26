@@ -19,11 +19,17 @@ export class SelfCareActivitieEntity implements SelfCareActivitie {
   })
   public id!: number;
 
-  @Column({ type: 'integer', name: 'feeling_journal_id' })
-  public feelingJournalId!: number;
+  @Column({ type: 'uuid', name: 'feeling_journal_id' })
+  public feelingJournalId!: string;
 
   @Column({ type: 'varchar' })
-  public title!: string;
+  public description!: string;
+
+  @Column({ type: 'varchar', name: 'dark_color' })
+  public darkColor!: string;
+
+  @Column({ type: 'varchar', name: 'normal_color' })
+  public normalColor!: string;
 
   @Column({ type: 'boolean', default: false })
   public done!: boolean;

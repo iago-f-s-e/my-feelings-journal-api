@@ -4,7 +4,12 @@ export {
   CreateFeelingJournalInService
 } from './create-feeling-journal.dto';
 export {
-  UpdateFeelingJournalInController,
-  UpdateFeelingJournalInRepository,
-  UpdateFeelingJournalInService
-} from './update-feeling-journal.dto';
+  CreateHappeningDiaryDtoInController,
+  CreateHappeningDiaryDtoInRepository,
+  CreateHappeningDiaryDtoInService
+} from './create-happening-diary-store';
+export {
+  CreateSelfCareDtoInController,
+  CreateSelfCareDtoInRepository,
+  CreateSelfCareDtoInService
+} from './create-self-care.dto';
